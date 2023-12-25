@@ -34,10 +34,12 @@ func main() {
 	//排序
 	sort.Sort(byArtist(tracks))
 	printTracks(tracks)
+
 	//反转
 	sort.Sort(sort.Reverse(byArtist(tracks)))
 	printTracks(tracks)
 
+	//按照标题、时间、长度排序
 	sort.Sort(CustomSort{
 		t: tracks,
 		less: func(x, y *Track) bool {
@@ -53,8 +55,14 @@ func main() {
 			return false
 		},
 	})
-
 	printTracks(tracks)
+
+	//验证是否正常排序
+	vs := []int{1, 2, 3, 4, 5}
+	fmt.Println(sort.IntsAreSorted(vs))
+
+	sort.Sort(sort.Reverse(sort.IntSlice(vs)))
+	fmt.Println(sort.IntsAreSorted(vs))
 }
 
 func printTracks(tracks []*Track) {
